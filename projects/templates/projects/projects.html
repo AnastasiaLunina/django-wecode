@@ -1,0 +1,43 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+{{ message }}
+
+{% if number > 10 %}
+{% else  %}
+{% endif %}
+
+<hr>
+
+<h1>Projects template</h1>
+
+<table>
+    <tr>
+        <th>Project</th>
+        <th>Votes</th>
+        <th>Ratio</th>
+        <th>Created</th>
+        <th></th>
+        <th></th>
+    </tr>
+    {% for project in projects %}
+        <tr>
+            <td>{{project.title}}</td>
+            <td>{{project.vote_total}}</td>
+            <td>{{project.vote_ratio}}%</td>
+            <td>{{project.created}}</td>
+            <td><a href="{% url 'project' project.id %}">View</a></td>
+            <td><a href="{% url 'delete-project' project.id %}">Delete</a></td>
+            <td><a href="{% url 'update-project' project.id %}">Edit</a></td>
+        </tr>
+    {% endfor %}
+</table>
+
+<ul>
+    {% for project in projects %}
+        <li>Title: <a href="{% url 'project' project.id %}">{{project.title}}</a> --- {{project.created}}</li>
+    {% endfor %}
+</ul>
+
+{% endblock content %}
