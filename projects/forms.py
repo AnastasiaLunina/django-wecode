@@ -23,3 +23,4 @@ class ProjectForm(ModelForm):
 
             for name, field in self.fields.items():
                 field.widget.attrs.update({'class': 'input'})
+                field['description'].widget.attrs.update({'class': 'custom-scroll'})

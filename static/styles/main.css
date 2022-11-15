@@ -562,9 +562,157 @@
     color: black;
   }
 
+  /* Form */
+  .content-box {
+    display: flex;
+    justify-content: center;
+  }
+
+  .formWrapper {
+    display: flex;
+    justify-content: center;
+    list-style: none;
+    padding: 3.5rem 5rem;
+    width: 50vw;
+    border-radius: 0.7rem;
+    margin-top: 50px;
+    border: 2px solid lightgray;
+    border-radius: 15px;
+    box-shadow: 0 8px 8px -4px grey;
+  }
+  
+  .formPage .formWrapper__subject {
+    font-size: 2.8rem;
+    color: var(--color-sub);
+    margin-bottom: 1rem;
+    margin-top: 2rem;
+  }
+
+  .form {
+    display: block;
+  }
+  
+  .form__field {
+    margin-top: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  .form__error {
+    display: block;
+    font-size: 1.4rem;
+  }
+  
+  .form__label,
+  .form__field > label {
+    display: block;
+    margin-bottom: 0.5rem;
+  }
+  
+  .form__label--inline {
+    display: inline-block;
+    margin-bottom: 0.8rem;
+  }
+
+  #id_tags {
+    list-style-type: none;
+  }
+  
+  #id_description {
+    height: 300px;
+    width: 400px;
+    resize: none;
+    outline: black;
+    padding: 15px;
+  }
+
+  #id_demo_link, #id_title, #id_source_link {
+    height: 40px;
+    width: 400px;
+    border: 2px solid lightgray;
+    border-radius: 15px;
+    box-shadow: 0 8px 8px -4px grey;
+    outline: black;
+    padding: 15px;
+  }
+
+  #id_description {
+    border: 2px solid lightgray;
+    border-radius: 15px;
+    box-shadow: 0 8px 8px -4px grey;
+    outline: black;
+  }
+
+  #id_featured_image {
+    border: 2px solid lightgray;
+    border-radius: 15px;
+    box-shadow: 0 8px 8px -4px grey;
+    outline: black;
+    padding: 5px 12px;
+    color: black;
+    margin: 20px 0;
+    font-size: 1rem;
+    width: 100%;
+  }
+
+  ::-webkit-file-upload-button {
+    background-image: linear-gradient(to top, #f77062 0%, #fe5196 100%);
+    border-radius: 4px;
+    border: none;
+    padding: 5px 12px;
+    margin: 20px 0;
+    width: 120px;
+    cursor: pointer;
+    margin-right: 10px;
+  }
+
+  ::-webkit-file-upload-button:hover {
+    background-image: linear-gradient(to top, #fe5196 0%, #f77062 100%);
+    color: #fff;
+
+  }
+
+  #id_tags input {
+    width: 20px; height: 20px;
+    border-radius: 50%;
+    transition: box-shadow .3s;
+    background: lightgrey;
+    cursor: pointer;
+    border: 0;
+    appearance: none; -webkit-appearance: none;
+  }
+
+  #id_tags input:checked{ 
+    box-shadow: inset 0 0 0 20px #fe5196; 
+  }
+
+/* Custom Scrollbar */
+#id_description {
+  overflow-y: auto;
+  max-height: 75vh;
+}
+
+#id_description::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.4);
+  border-radius: 10px;
+  background-color: rgba(255, 255, 255, 0.3);
+  margin-right: 5px;
+}
+
+#id_description::-webkit-scrollbar {
+  width: 10px;
+}
+
+#id_description::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  background-color: rgba(0, 0, 0, 0.8);
+}
 
 
 
 
 
+  
+  
 
+  

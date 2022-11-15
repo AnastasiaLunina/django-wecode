@@ -1,0 +1,24 @@
+{% extends 'admin/base.html' %}
+{% comment %} {% load i18n  eatn_tags static %} {% endcomment %}
+{% load i18n %}
+{% load static %}
+
+{% block title %}{{ title }} | {% trans "WeCode  | ADMIN " %}{% endblock %}
+
+{% block branding %}
+    <h1 id="head">
+       <a href="{% url 'projects' %}">
+            <img src="{% static 'images/logo.png' %}"
+            alt="logo"
+            class="fa-solid fa-laptop"> WeCode | Admin Area
+       </a>
+    </h1>
+{% endblock %}
+{% block extrastyle %}
+    <link rel="stylesheet" href="{% static 'styles/admin.css' %}">
+    <link rel="icon" href="{% static 'images/logo.png' %}">
+{% endblock %}
+
+
+
+{% block nav-global %}{% endblock %}
