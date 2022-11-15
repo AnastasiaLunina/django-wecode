@@ -2,12 +2,101 @@
 
 {% block content %}
 
-<h1>{{project.title}}</h1>
-<hr>
-{% for tag in project.tags.all %}
-    <span style="border:1px solid grey">{{tag}}</span>
-{% endfor %}
-<hr>
-<br>
-<p>{{project.description}}</p>
+{% load static %}
+
+<!-- Main Section -->
+<div class="about-me section-title">
+    <div class="name-image">
+       <h2>{{project.title}}</h2>
+       <br>
+       <h4>Developed by Anastasia Lunina</h4>
+       <br>
+    </div>
+</div>
+ <hr>
+ <div class="trend-title-container">
+    <h3 class="section-title">Tools & Stack</h3>
+ </div>
+ <ul class="tag-list">
+    {% for tag in project.tags.all %}
+        <li class="">
+            <small>
+                <a class="tag-link" href="#">{{tag}}</a>
+            </small>
+        </li>
+    {% endfor %}
+ </ul>
+ <div class="posts-container" id="section-articles">
+    <main class="main-section">
+       <article class="post">
+          <div class="post-content">
+            <div class="side-menu-timestamp">
+                <img src="{{project.featured_image.url}}" width="650px" height="400px" alt="project" />
+                {% if project.source_link %}
+                 <h3 class="side-menu-title">
+                    <a class="title-link" href="{{project.source_link}}" target="_blank"><img src="{% static 'images/external.png' %}" alt="code" height="30px">Source Code</a>
+                 </h3>
+                {% endif %}
+
+                {% if project.demo_link %}
+                <h3 class="side-menu-title">
+                    <a class="title-link" href="{{project.demo_link}}" target="_blank">
+                        <img src="{% static 'images/external.png' %}" alt="code" height="30px">Demo Link
+                    </a>
+                </h3>
+               {% endif %}
+
+
+              </div>
+             <div class="post-timestamp">
+                <h2 class="date">About the project</h2>
+             </div>
+             
+             <div class="post-text">
+                <p class="post-text-block">{{project.description}}</p>
+                <hr class="mobile-underline">
+             </div>
+          </div>
+       </article>
+    </main>
+    <!-- Posts section ends -->
+    <!-- Side section -->
+    <aside class="side-menu">
+       <article class="side-post-container">
+        <div class="comments">
+            <h3 class="singleProject__subtitle">Feedback</h3>
+            <h3 class="project--rating">
+                {{project.vote_ratio}}% Postitive Feedback ({{project.vote_total}} Vote{{project.vote_total|pluralize:"s"}})
+            </h3>
+            <form class="form" action="#" method="POST">
+              <!-- Textarea -->
+              <div class="form__field">
+                <label for="formInput#textarea"></label>
+                <textarea class="input input--textarea" name="message" id="formInput#textarea"
+                  placeholder="Write your comments here..."></textarea>
+              </div>
+              <button class="button-feedback-comments" type="submit">Comments</button>
+            </form>
+            <div class="commentList">
+              <div class="comment">
+                <a href="profile.html">
+                  <img class="avatar avatar--md"
+                    src="https://pbs.twimg.com/profile_images/1335382240931368961/b3wSZKj4_400x400.jpg" alt="user" />
+                </a>
+                <div class="comment__details">
+                  <a href="profile.html" class="comment__author">Sulamita Ivanov</a>
+                  <p class="comment__info">
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit alias numquam perferendis
+                    mollitia minus minima exercitationem possimus ab deserunt qui, soluta iusto doloribus eveniet
+                    similique consequuntur ratione, dignissimos ut magni laborum quo.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+       </article>
+       <!-- </section> -->
+    </aside>
+ </div>
+ <!-- Side section ends -->
 {% endblock content %}

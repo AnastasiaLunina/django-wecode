@@ -1,3 +1,36 @@
-<h1>Logo</h1>
+{% load static %}
 
-<a href="{% url 'create-project' %}">Add project</a>
+<!-- Navigation -->
+<nav class="navbar">
+    <div class="navbar__container">
+        <a href="{% url 'projects' %}" id="navbar__logo">
+            <img class="fa-solid fa-laptop" src="{% static 'images/logo.png' %}"/>
+            WeCode
+        </a>
+        <ul class="navbar__menu">
+            <li class="navbar__item">
+                <a href="" class="navbar__links">Developers</a>
+            </li>
+            <li class="navbar__item">
+                <a href="{% url 'projects' %}" class="navbar__links">Projects</a>
+            </li>
+            <li class="navbar__item">
+                <a href="" class="navbar__links">Inbox</a>
+            </li>
+            <li class="navbar__item">
+                <a href="" class="navbar__links">My Account</a>
+            </li>
+            <li class="navbar__item">
+                <button class="nav__btn">
+                    <a href="" class="navbar__links">Login/Sign In</a>
+                </button>
+            </li>
+            <li class="navbar__item">
+                <button class="nav__btn">
+                    <a href="{% url 'create-project' %}" class="navbar__links">Add project</a>
+                </button>
+            </li>
+        </ul>
+    </div>
+    </nav>
+

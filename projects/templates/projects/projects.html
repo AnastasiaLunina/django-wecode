@@ -2,42 +2,83 @@
 
 {% block content %}
 
-{{ message }}
-
-{% if number > 10 %}
-{% else  %}
-{% endif %}
-
-<hr>
-
-<h1>Projects template</h1>
-
-<table>
-    <tr>
-        <th>Project</th>
-        <th>Votes</th>
-        <th>Ratio</th>
-        <th>Created</th>
-        <th></th>
-        <th></th>
-    </tr>
+<!-- <table>
     {% for project in projects %}
         <tr>
-            <td>{{project.title}}</td>
-            <td>{{project.vote_total}}</td>
-            <td>{{project.vote_ratio}}%</td>
-            <td>{{project.created}}</td>
             <td><a href="{% url 'project' project.id %}">View</a></td>
             <td><a href="{% url 'delete-project' project.id %}">Delete</a></td>
             <td><a href="{% url 'update-project' project.id %}">Edit</a></td>
         </tr>
     {% endfor %}
-</table>
+</table> -->
 
-<ul>
-    {% for project in projects %}
-        <li>Title: <a href="{% url 'project' project.id %}">{{project.title}}</a> --- {{project.created}}</li>
-    {% endfor %}
-</ul>
+ <!-- Main Section -->
+ <main class="projects">
+    <section class="hero-section text-center">
+      <div class="container container--narrow">
+        <div class="hero-section__box">
+          <h2>SEARCH FOR <span class="hero-section__box__span">Projects</span></h2>
+        </div>
+
+        <div class="hero-section__search">
+          <form class="form" action="#" method="get">
+              <!-- <label for="formInput#search">Search By Projects </label> -->
+              <input class="input input--text" id="formInput#search" type="text" name="text"
+                placeholder="Search by Project Title" />
+            <button class="btn btn--sub" type="submit" value="Search">Search</button>
+          </form>
+        </div>
+      </div>
+    </section>
+    <!-- Search Result: DevList -->
+    <section class="projectsList">
+      <div class="container project__cards-container">
+        <div class="grid grid--three">
+            {% for project in projects %}
+                <div class="column">
+                    <div class="card project">
+                    <a href="{% url 'project' project.id %}" class="project">
+                        <img class="project__thumbnail" src="{{project.featured_image.url}}" alt="project thumbnail" />
+                        <div class="card__body">
+                        <h3 class="project__title">{{project.title}}</h3>
+                        <p><a class="project__author" href="{% url 'project' project.id %}">By Dennis Ivanov</a></p>
+                        <p class="project--rating">
+                            <span style="font-weight: bold;">{{project.vote_ratio}}%</span> Positive
+                            Feedback ({{project.vote_total}} Vote{{project.vote_total|pluralize:"s"}})
+                        </p>
+                        <div class="project__tags">
+                            {% for tag in project.tags.all %}
+                                <span class="tag tag--pill tag--main">
+                                    <small>{{tag}}</small>
+                                </span>
+                            {% endfor %}
+                        </div>
+                        </div>
+                    </a>
+                    </div>
+                </div>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="pagination">
+      <ul class="container">
+        <li><a href="#" class="btn btn--disabled">&#10094; Prev</a></li>
+        <li><a href="#" class="btn btn--sub">01</a></li>
+        <li><a href="#" class="btn">02</a></li>
+        <li><a href="#" class="btn">03</a></li>
+        <li><a href="#" class="btn">04</a></li>
+        <li><a href="#" class="btn">05</a></li>
+        <li><a href="#" class="btn">06</a></li>
+        <li><a href="#" class="btn">07</a></li>
+        <li><a href="#" class="btn">08</a></li>
+        <li><a href="#" class="btn">09</a></li>
+        <li><a href="#" class="btn">10</a></li>
+        <li><a href="#" class="btn">Next &#10095;</a></li>
+      </ul>
+    </div>
+  </main>
 
 {% endblock content %}
