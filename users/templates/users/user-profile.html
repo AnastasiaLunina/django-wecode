@@ -2,4 +2,103 @@
 
 {% block content %}
 
+<main class="projects">
+
+    <section class="">
+        <div class="single__profile-main__container">
+            <div class=" card project single__profile">
+
+                <div class="single__profile-card__container">
+                    <img class="project__thumbnail" src="{{ profile.profile_image.url }}" alt="avatar">
+                    <h3 class="project__title single__profile-name">{{profile.name}}</h3>
+                    <p><a class="project__author" href="">{{profile.short_intro}}</a></p>
+                    <p class="project--rating">Based in {{profile.location}}</p>
+
+                    <ul class="single__profile-social__list">
+                        {% if profile.social_github %}
+                            <a href="{{profile.social_github}}"><li class="single__profile-social__list-item"><i class="fa-brands fa-github fa-2xl"></i></li></a>
+                        {% endif %}
+                        {% if profile.social_twitter %}
+                            <a href="{{profile.social_twitter}}"><li class="single__profile-social__list-item"><i class="fa-brands fa-twitter fa-2xl"></i></li></a>
+                        {% endif %}
+                        {% if profile.social_linkedin %}
+                            <a href="{{profile.social_linkedin}}"><li class="single__profile-social__list-item"><i class="fa-brands fa-linkedin fa-2xl"></i></li></a>
+                        {% endif %}
+                        {% if profile.social_website %}
+                            <a href="{{profile.social_website}}"><li class="single__profile-social__list-item"><i class="fa-solid fa-globe fa-2xl"></i></a>
+                        {% endif %}
+                        {% if profile.social_youtube %}
+                            <a href="{{profile.social_youtube}}"><li class="single__profile-social__list-item"><i class="fa-brands fa-youtube fa-2xl"></i></li></a>
+                        {% endif %}
+                    </ul>
+
+                    <div>
+                        <button class="button-feedback-comments">Send Message</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="single__profile-about_main-container">
+                <div class="single__profile-about_container">
+                    <h2 class="single__profile-about_heading">About Me</h2>
+                    <p class="single__profile-about_par">{{profile.bio}}</p>
+                </div>
+    
+                <div class="single__profile-skills_container">
+                    <h2 class="single__profile-skills subheading">Skills</h2>
+                    {% for skill in skills_with_description %}
+                        <h3 class="single__profile-skills-heading">{{skill.name}}</h3>
+                        <p class="single__profile-skills-par">{{skill.description}}</p>
+                    {% endfor %}
+                </div>    
+                
+                <div class="single__profile-about_container">
+                    <h2 class="single__profile-about_heading subheading">Other Skills</h2>
+                    <div class="project__tags">
+                        {% for skill in skills_without_description %}
+                        <span class="tag tag--pill tag--main">
+                                <small>{{skill}}</small>
+                            </span>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="single__profile-projects-container">
+            <h2 class="single__profile-projects-heading">Projects</h2>
+            <section class="projectsList">
+                <div class="container project__cards-container">
+                  <div class="grid grid--three">
+                      {% for project in profile.project_set.all %}
+                          <div class="column">
+                              <div class="card project">
+                              <a href="{% url 'project' project.id %}" class="project">
+                                  <img class="project__thumbnail" src="{{project.featured_image.url}}" alt="project thumbnail" />
+                                  <div class="card__body">
+                                  <h3 class="project__title">{{project.title}}</h3>
+                                  <p><a class="project__author" href="{% url 'project' project.id %}">By {{project.owner.name}}</a></p>
+                                  <p class="project--rating">
+                                      <span style="font-weight: bold;">{{project.vote_ratio}}%</span> Positive
+                                      Feedback ({{project.vote_total}} Vote{{project.vote_total|pluralize:"s"}})
+                                  </p>
+                                  <div class="project__tags">
+                                      {% for tag in project.tags.all %}
+                                          <span class="tag tag--pill tag--main">
+                                              <small>{{tag}}</small>
+                                          </span>
+                                      {% endfor %}
+                                  </div>
+                                  </div>
+                              </a>
+                              </div>
+                          </div>
+                      {% endfor %}
+                    </div>
+                  </div>
+                </div>
+              </section>
+        </div>
+    </section>
+</main>
+
 {% endblock %}

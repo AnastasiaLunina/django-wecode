@@ -37,7 +37,7 @@
                         </a>
 
                         <div class="project__tags">
-                            {% for skill in profile.skill_set.all %}
+                            {% for skill in profile.skill_set.all|slice:"10" %}
                                 <span class="tag tag--pill tag--main">
                                     <small>{{skill}}</small>
                                 </span>

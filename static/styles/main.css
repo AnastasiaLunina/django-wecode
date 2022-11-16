@@ -716,7 +716,77 @@ body {
   background-color: rgba(0, 0, 0, 0.8);
 }
 
+.single__profile-main__container {
+  display: flex;
+  margin: 100px;
+}
 
+.single__profile-card__container {
+  display: flex;
+  flex-direction: column;
+  align-items:center;
+}
+
+.single__profile-social__list {
+  display: flex;
+  list-style-type: none;
+}
+
+.single__profile-social__list-item {
+  padding: 15px;
+
+}
+
+.fa-brands, .fa-globe {
+  color:#fd4084;
+}
+
+.project__thumbnail {
+  border-radius: 15px;
+}
+
+.single__profile-name {
+  margin-top: 15px;
+}
+
+.single__profile {
+  margin-right: 150px;
+  height: 100%;
+}
+
+.single__profile-about_main-container {
+  margin-right: 50px;
+}
+
+.single__profile-about_container {
+  margin-bottom: 50px;
+}
+
+.single__profile-about_heading, .single__profile-skills, .subheading {
+  margin: 20px 0;
+  font-size: 25px;
+  text-transform: uppercase;
+}
+
+.single__profile-about_par, .single__profile-skills-par {
+  color: gray;
+}
+
+.single__profile-skills-heading {
+  margin: 10px 0;
+  color: #ff0844;
+}
+
+.single__profile-projects-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.single__profile-projects-heading {
+  text-align: center;
+  text-transform: uppercase;
+  font-size: 25px;
+}
 
 
 
