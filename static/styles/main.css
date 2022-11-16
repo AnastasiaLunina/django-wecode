@@ -7,6 +7,10 @@
     font-family: 'Montserrat', sans-serif;
 }
 
+body {
+    overflow-x: hidden;
+  }
+
 .navbar {
     background: #131313;
     height: 80px;
@@ -162,6 +166,7 @@
     border-radius: 5px;
     border: none;
     font-size: 20px;
+    padding: 10px;
 }
 
 .input--text::placeholder {
@@ -686,23 +691,26 @@
   }
 
 /* Custom Scrollbar */
-#id_description {
+#id_description, .input--textarea {
   overflow-y: auto;
   max-height: 75vh;
 }
 
-#id_description::-webkit-scrollbar-track {
+#id_description::-webkit-scrollbar-track, 
+.input--textarea::-webkit-scrollbar-track {
   box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.4);
   border-radius: 10px;
   background-color: rgba(255, 255, 255, 0.3);
   margin-right: 5px;
 }
 
-#id_description::-webkit-scrollbar {
+#id_description::-webkit-scrollbar,
+.input--textarea::-webkit-scrollbar-track {
   width: 10px;
 }
 
-#id_description::-webkit-scrollbar-thumb {
+#id_description::-webkit-scrollbar-thumb,
+.input--textarea::-webkit-scrollbar-thumb {
   border-radius: 10px;
   box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
   background-color: rgba(0, 0, 0, 0.8);
