@@ -3,7 +3,7 @@ from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.models import User
 from django.contrib import messages
 from .models import Profile
-
+from .forms import CustomUserCreationForm
 
 # Create your views here.
 def profiles(request):
@@ -28,6 +28,8 @@ def user_profile(request, pk):
 
 
 def user_login(request):
+    page = 'login'
+
     if request.user.is_authenticated:
         return redirect('profiles')
 
@@ -38,7 +40,7 @@ def user_login(request):
         try:
             user = User.objects.get(username=username)
         except:
-            messages.error(request, 'Username does not exist')
+            pass
 
         user = authenticate(request, username=username, password=password)
 
@@ -53,5 +55,33 @@ def user_login(request):
 
 def user_logout(request):
     logout(request)
-    messages.success(request, 'User was logged out')
+    messages.info(request, 'User was logged out')
     return redirect('login')
+
+
+def user_register(request):
+    page = 'register'
+    form = CustomUserCreationForm()
+
+    if request.method == 'POST':
+        form = CustomUserCreationForm(request.POST)
+
+        if form.is_valid():
+            # creating a new instance and saving it temporary to make changes to that instance
+            user = form.save(commit = False)
+            user.username = user.username.lower()
+            user.save()
+
+            messages.info(request, 'User account was created!')
+
+            login(request, user)
+            return redirect('profiles')
+        
+        else:
+            messages.error(request, 'Oh no, something went wrong')
+
+    context = {
+        'page': page,
+        'form': form,
+    }
+    return render(request, 'users/login_register.html', context)

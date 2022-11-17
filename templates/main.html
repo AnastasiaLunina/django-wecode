@@ -15,17 +15,21 @@
     {% include 'navbar.html' %}
 
     {% if messages %}
-        <ul class="messages">
-            {% for message in messages %}
-            <li {% if message.tags %} class="{{ message.tags }}" {% endif %}>{{message}}</li>
-            {% endfor %}
-        </ul>
+
+        {% for message in messages %}
+            <div class="alert alert--{{message.tags}}">
+                <p class="alert__message">{{message}}</p>
+                <button class="alert__close">&Cross;</button>
+            </div>
+        {% endfor %}
+
     {% endif %}
 
     {% block content %}
 
     {% endblock content %}
     
-    <h2>Footer</h2>
 </body>
+<script src="{% static 'js/app.js' %}"></script>
 </html>
+

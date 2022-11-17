@@ -1,12 +1,77 @@
 {% extends 'main.html' %}
 
+{% load static %}
+
 {% block content %}
 
-<form method="POST" action="{% url 'login' %}">
-    {% csrf_token %}
-    <input type="text" name="username" placeholder="Username"/>
-    <input type="password" name="password" placeholder="Your Password"/>
-    <input type="submit" value="Login" />
-</form>
+<div class="register-wrapper">
+    {% if page == 'register' %}
+
+    <div class="register register__main-container">
+        <form method="POST" action="{% url 'register' %}">
+
+        <div class="">
+            <div class="register__header">
+                <img src="{% static 'images/login.png' %}" alt="icon" class="register__image">
+                <h1 class="register__header-title">Register New Account</h1>
+                <p>Hey, join us!</p>
+            </div>
+
+                {% csrf_token %}
+                <div class="register__form">
+                    <!-- rendering built in user register form as_p for styling -->
+                    {% for field in form %}
+                        <label for="formInput#text" class="register__form-label">{{field.label}}</label>
+                        {{field}}
+
+                        <!-- {% if field.help_text %}
+                            <p>{{field.help_text}}</p>
+                        {% endif %} -->
+
+                        {% for error in field.errors %}
+                            <p style="color: red">{{error}}</p>
+                        {% endfor %}
+
+                    {% endfor %}
+
+                    <div class="register_button">
+                        <button type="submit" value="Register User" class='button-feedback-comments'>Register</button>
+                    </div>
+                </form>    
+        
+                <p>Already have an account? 
+                    <a href="{% url 'login' %}" class="register__signup-link">Log in</a>
+                </p>
+            </div>
+        </div>
+    
+    {% else %}
+    <div class="register register__main-container">
+    
+        <form method="POST" action="{% url 'login' %}" class="register-container">
+            <div class="register__header">
+                <img src="{% static 'images/login.png' %}" alt="icon" class="register__image">
+                <h2 class="register__header-title">Login</h2>
+                <p>Hey, welcome back!</p>
+            </div>
+            {% csrf_token %}
+            <div class="register__form">
+                <label for="formInput#text" class="register__form-label">Username</label>
+                <input type="text" name="username" placeholder="Username" class="id_title"/>
+                <label for="formInput#text" class="register__form-label">Password</label>
+                <input type="password" name="password" placeholder="Your Password" class="id_title"/>
+                <div class="register_button">
+                    <button type="submit" value="Login" class='button-feedback-comments'>Login</button>
+                    <p class="register_button-par">Forgot password?</p>
+                </div>
+        
+                <p>Don't have an account? <a href="{% url 'register' %}" class="register__signup-link">Sign up</a></p>
+            </div>
+        </form>
+    </div>
+    {% endif %}
+    </div>
+</div>
+
 
 {% endblock %}
