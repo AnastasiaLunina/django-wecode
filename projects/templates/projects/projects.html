@@ -11,10 +11,10 @@
         </div>
 
         <div class="hero-section__search">
-          <form class="form" action="#" method="get">
+          <form class="form" action="{% url 'projects' %}" method="get">
               <!-- <label for="formInput#search">Search By Projects </label> -->
-              <input class="input input--text" id="formInput#search" type="text" name="text"
-                placeholder="Search by Project Title" />
+              <input class="input input--text" id="formInput#search" type="text" name="search_query"
+              placeholder="Search by project name" value="{{search_query}}"/>
             <button class="btn btn--sub" type="submit" value="Search">Search</button>
           </form>
         </div>
@@ -27,9 +27,9 @@
             {% for project in projects %}
                 <div class="column">
                     <div class="card project">
-                    <a href="{% url 'project' project.id %}" class="project">
-                        <img class="project__thumbnail" src="{{project.featured_image.url}}" alt="project thumbnail" />
-                    </a>
+                          <a href="{% url 'project' project.id %}" class="project">
+                            <img class="project__thumbnail" src="{{project.featured_image.url}}" alt="project thumbnail" />
+                          </a>                      
                         <div class="card__body">
                         <h3 class="project__title">{{project.title}}</h3>
                         <p><a class="project__author" href="{% url 'user-profile' project.owner.id %}">By {{project.owner.name}}</a></p>

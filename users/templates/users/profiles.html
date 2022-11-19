@@ -11,10 +11,10 @@
         </div>
 
         <div class="hero-section__search">
-          <form class="form" action="#" method="get">
+          <form class="form" action="{% url 'profiles' %}" method="get">
               <!-- <label for="formInput#search">Search By Projects </label> -->
-              <input class="input input--text" id="formInput#search" type="text" name="text"
-                placeholder="Search by developer name" />
+              <input class="input input--text" id="formInput#search" type="text" name="search_query"
+                placeholder="Search by developer name" value="{{search_query}}"/>
             <button class="btn btn--sub" type="submit" value="Search">Search</button>
           </form>
         </div>
@@ -27,14 +27,17 @@
                 {% for profile in profiles %}
                 <div class="column">
                     <div class="card project">
-                        <a href="{% url 'user-profile' profile.id %}" class="project">
-                            <img class="project__thumbnail" src="{{profile.profile_image.url}}" alt="project thumbnail" />
-                            <h3 class="project__title">{{profile.name}}</h3>
-                            <p><a class="project__author" href="">{{profile.short_intro|slice:"50"}}</a></p>
-                            <p class="project--rating">
-                                {{profile.bio|slice:"150"}}
-                            </p>
-                        </a>
+                            <a href="{% url 'user-profile' profile.id %}" class="project">
+                                <!-- <div class="projects-image-container"> -->
+                                    <img class="project__thumbnail" src="{{profile.profile_image.url}}" alt="project thumbnail" />
+                                <!-- </div> -->
+                                <h3 class="project__title">{{profile.name}}</h3>
+                                <p><a class="project__author" href="">{{profile.short_intro|slice:"50"}}</a></p>
+                                <p class="project--rating">
+                                    {{profile.bio|slice:"150"}}
+                                </p>
+                            </a>
+                        
 
                         <div class="project__tags">
                             {% for skill in profile.skill_set.all|slice:"10" %}
