@@ -9,6 +9,7 @@
             <div class=" card project single__profile">
 
                 <div class="single__profile-card__container">
+                    <a href="{% url 'edit-profile' %}"><button>Edit</button></a>
                     <img class="project__thumbnail profile-image" src="{{ profile.profile_image.url }}" alt="avatar">
                     <h3 class="project__title single__profile-name">{{profile.name}}</h3>
                     <p><a class="project__author" href="">{{profile.short_intro}}</a></p>
@@ -45,23 +46,19 @@
                 </div>
     
                 <div class="single__profile-skills_container">
-                    <h2 class="single__profile-skills subheading">Skills</h2>
-                    {% for skill in skills_with_description %}
+                    <div>
+                        <h2 class="single__profile-skills subheading">Skills</h2>
+                        <button>Add skill</button>
+                    </div>
+
+                    {% for skill in skills %}
                         <h3 class="single__profile-skills-heading">{{skill.name}}</h3>
+                        <button>Edit</button>
+                        <button>Delete</button>
                         <p class="single__profile-skills-par">{{skill.description}}</p>
                     {% endfor %}
                 </div>    
                 
-                <div class="single__profile-about_container">
-                    <h2 class="single__profile-about_heading subheading">Other Skills</h2>
-                    <div class="project__tags">
-                        {% for skill in skills_without_description %}
-                        <span class="tag tag--pill tag--main">
-                                <small>{{skill}}</small>
-                            </span>
-                        {% endfor %}
-                    </div>
-                </div>
             </div>
         </div>
         <div class="single__profile-projects-container">
@@ -69,17 +66,21 @@
             <section class="projectsList">
                 <div class="container project__cards-container">
                   <div class="grid grid--three">
-                      {% for project in profile.project_set.all %}
+                      {% for project in projects %}
                           <div class="column">
                               <div class="card project">
                               <a href="{% url 'project' project.id %}" class="project">
+                                <button>Edit</button>
+                                <button>Delete</button>
+  
                                   <img class="project__thumbnail" src="{{project.featured_image.url}}" alt="project thumbnail" />
                                   <div class="card__body">
                                   <h3 class="project__title">{{project.title}}</h3>
                                   <p><a class="project__author" href="{% url 'user-profile' project.owner.id %}">By {{project.owner.name}}</a></p>
                                   <p class="project--rating">
-                                      <span style="font-weight: bold;">{{project.vote_ratio}}%</span> Positive
-                                      Feedback ({{project.vote_total}} Vote{{project.vote_total|pluralize:"s"}})
+                                      <!-- <span style="font-weight: bold;">{{project.vote_ratio}}%</span> Positive
+                                      Feedback ({{project.vote_total}} Vote{{project.vote_total|pluralize:"s"}}) -->
+                                      {{project.description|slice:'200'}}
                                   </p>
                                   <div class="project__tags">
                                       {% for tag in project.tags.all %}
@@ -92,6 +93,7 @@
                               </a>
                               </div>
                           </div>
+
                       {% endfor %}
                     </div>
                   </div>

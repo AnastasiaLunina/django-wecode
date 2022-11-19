@@ -18,7 +18,7 @@
                 <a href="" class="navbar__links">Inbox</a>
             </li>
             <li class="navbar__item">
-                <a href="" class="navbar__links">My Account</a>
+                <a href="{% url 'account' %}" class="navbar__links">My Account</a>
             </li>
             {% if request.user.is_authenticated %}
                 <li class="navbar__item">

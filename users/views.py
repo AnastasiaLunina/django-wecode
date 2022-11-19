@@ -2,8 +2,9 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.models import User
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 from .models import Profile
-from .forms import CustomUserCreationForm
+from .forms import CustomUserCreationForm, ProfileForm
 
 # Create your views here.
 def profiles(request):
@@ -75,7 +76,7 @@ def user_register(request):
             messages.info(request, 'User account was created!')
 
             login(request, user)
-            return redirect('profiles')
+            return redirect('edit-profile')
         
         else:
             messages.error(request, 'Oh no, something went wrong')
@@ -85,3 +86,39 @@ def user_register(request):
         'form': form,
     }
     return render(request, 'users/login_register.html', context)
+
+
+@login_required(login_url='login')
+def get_account(request):
+    profile = request.user.profile
+    skills = profile.skill_set.all()
+    projects = profile.project_set.all()
+
+    context = {
+        'profile': profile,
+        'skills': skills,
+        'projects': projects,
+    }
+    
+    return render(request, 'users/account.html', context)
+
+
+@login_required(login_url='login')
+def edit_profile(request):
+    profile = request.user.profile
+    # Add instance=profile as an argument to pre-render user's information in form
+    form = ProfileForm(instance=profile)
+
+    if request.method == 'POST':
+        # To send image the request.FILES needed
+        form = ProfileForm(request.POST, request.FILES, instance=profile)
+        if form.is_valid():
+            form.save()
+
+            return redirect('account')
+
+    context = {
+        'form': form,
+    }
+
+    return render(request, 'users/edit_profile_form.html', context)
