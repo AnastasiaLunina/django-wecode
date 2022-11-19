@@ -4,10 +4,11 @@ from django.contrib.auth.models import User
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from .models import Profile
-from .forms import CustomUserCreationForm, ProfileForm
+from .forms import CustomUserCreationForm, ProfileForm, SkillForm
 
 # Create your views here.
 def profiles(request):
+    # accessing the data from model
     profiles = Profile.objects.all()
     context = {
         'profiles': profiles
@@ -62,6 +63,7 @@ def user_logout(request):
 
 def user_register(request):
     page = 'register'
+    # accessing the data from model
     form = CustomUserCreationForm()
 
     if request.method == 'POST':
@@ -105,6 +107,7 @@ def get_account(request):
 
 @login_required(login_url='login')
 def edit_profile(request):
+    # getting particular user
     profile = request.user.profile
     # Add instance=profile as an argument to pre-render user's information in form
     form = ProfileForm(instance=profile)
@@ -122,3 +125,71 @@ def edit_profile(request):
     }
 
     return render(request, 'users/edit_profile_form.html', context)
+
+
+@login_required(login_url='login')
+def add_skill(request):
+    # getting particular user
+    profile = request.user.profile
+
+    # accessing the data from model
+    form = SkillForm()
+
+    if request.method == 'POST':
+        form = SkillForm(request.POST)
+
+        if form.is_valid():
+            skill = form.save(commit=False)
+            skill.owner = profile
+            skill.save()
+            messages.success(request, 'Good job adding a new skill!')
+            return redirect('account')
+
+    # passing to context to render it in a template
+    context = {
+        'form': form,
+    }
+    return render(request, 'users/skill_form.html', context)
+
+
+@login_required(login_url='login')
+def edit_skill(request, pk):
+    # accessing the data from model
+    profile = request.user.profile
+    # Make sure only owner can edit it
+    skill = profile.skill_set.get(id=pk)
+    # Add instance=profile as an argument to pre-render user's information in form
+    form = SkillForm(instance=skill)
+
+    if request.method == 'POST':
+        form = SkillForm(request.POST, instance=skill)
+        # getting particular user
+        form = SkillForm(request.POST)
+
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Skill was updated!')            
+            return redirect('account')
+    # passing to context to render it in a template
+    context = {
+        'form': form,
+    }
+    return render(request, 'users/skill_form.html', context)
+
+
+@login_required(login_url='login')
+def delete_skill(request, pk):
+    profile = request.user.profile
+    skill = profile.skill_set.get(id=pk)
+
+    if request.method == 'POST':
+        skill.delete()
+        messages.success(request, 'Skill was deleted!')            
+        return redirect('account')
+
+    context = {
+        # to use delete_template throughout the project key should be 'object'
+        'object': skill,
+    }
+
+    return render(request, 'delete_template.html', context)

@@ -48,13 +48,14 @@
                 <div class="single__profile-skills_container">
                     <div>
                         <h2 class="single__profile-skills subheading">Skills</h2>
-                        <button>Add skill</button>
+                        <button><a href="{% url 'add-skill' %}">Add skill</a></button>
                     </div>
 
                     {% for skill in skills %}
                         <h3 class="single__profile-skills-heading">{{skill.name}}</h3>
-                        <button>Edit</button>
-                        <button>Delete</button>
+                        <button><a href="{% url 'edit-skill' skill.id %}">Edit</a></button>
+                        <!-- Adding  ?next=/account to send user to a previous page dynamically-->
+                        <button><a href="{% url 'delete-skill' skill.id %}?next=/account">Delete</a></button>
                         <p class="single__profile-skills-par">{{skill.description}}</p>
                     {% endfor %}
                 </div>    
@@ -63,6 +64,7 @@
         </div>
         <div class="single__profile-projects-container">
             <h2 class="single__profile-projects-heading">Projects</h2>
+            <button><a href="{% url 'create-project' %}">Add project</a></button>
             <section class="projectsList">
                 <div class="container project__cards-container">
                   <div class="grid grid--three">
@@ -70,9 +72,10 @@
                           <div class="column">
                               <div class="card project">
                               <a href="{% url 'project' project.id %}" class="project">
-                                <button>Edit</button>
-                                <button>Delete</button>
-  
+                                <button><a href="{% url 'update-project' project.id %}">Edit</a></button>
+                                <button><a href="{% url 'delete-project' project.id %}?next=/account">Delete</a></button>
+                                <br><br>
+                                
                                   <img class="project__thumbnail" src="{{project.featured_image.url}}" alt="project thumbnail" />
                                   <div class="card__body">
                                   <h3 class="project__title">{{project.title}}</h3>

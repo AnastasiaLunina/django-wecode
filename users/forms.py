@@ -2,7 +2,7 @@ from django.forms import ModelForm
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
-from .models import Profile
+from .models import Profile, Skill
 
 
 class CustomUserCreationForm(UserCreationForm):
@@ -52,3 +52,21 @@ class ProfileForm(ModelForm):
 
         self.fields['profile_image'].widget.attrs.update({'id': 'id_featured_image', 'class': 'image-link'})
         self.fields['bio'].widget.attrs.update({'id': 'id_description'})
+
+
+class SkillForm(ModelForm):
+
+    class Meta:
+        model = Skill
+        fields = '__all__'
+        # list all fields excluding owner
+        exclude = ['owner']
+
+    def __init__(self, *args, **kwargs):
+        super(SkillForm, self).__init__(*args, **kwargs)
+
+
+        for name, field in self.fields.items():
+            field.widget.attrs.update({'class': 'input'})
+            field.widget.attrs.update({'id': 'id_title'})
+        self.fields['description'].widget.attrs.update({'id': 'id_description_short'})

@@ -1,0 +1,30 @@
+{% extends 'main.html' %}
+
+{% load static %}
+
+{% block content %}
+
+<div class="register-wrapper">
+    <div class="register register__main-container">
+        <form action="" method="POST">
+            <div class="register__header">
+                <img src="{% static 'images/award.png' %}" alt="icon" class="register__image">
+                <h1 class="register__header-title">Add some skills</h1>
+                <p>It's your time to shine!</p>
+            </div>
+
+            {% csrf_token %}
+
+            {% for field in form %}
+                <label for="formInput#text" class="register__form-label">{{field.label}}</label>
+                <div class="form-change-picture">
+                    {{field}}
+                </div>
+            {% endfor %}
+
+            <button class="button-feedback-comments" type="submit">Submit</button>
+        </form>
+    </div>
+</div>
+
+{% endblock %}
