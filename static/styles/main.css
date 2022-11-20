@@ -185,10 +185,13 @@ body {
     background-image: linear-gradient(to top, #ff0844 0%, #ffb199 100%);
     font-size: 20px;
     position: relative;
+    padding: 5px;
+    color: black;
 }
 
 .btn--sub:hover {
-    color: #fff;
+    background-color: #ff0844;
+    background-image: linear-gradient(to top, #ff8177 0%, #ffb199 100%);
 }
   
 .projectsList {
@@ -983,6 +986,15 @@ body {
   justify-content: center;
 } */
 
+.edit-link {
+  text-decoration: none;
+  color: black;
+}
+
+.add-project-btn {
+  width: 100px;
+  margin: 20px auto auto auto;
+}
 
 
 
