@@ -46,7 +46,6 @@
                 </h3>
                {% endif %}
 
-
               </div>
              <div class="post-timestamp">
                 <h2 class="date">About the project</h2>
@@ -68,30 +67,48 @@
             <h3 class="project--rating">
                 {{project.vote_ratio}}% Postitive Feedback ({{project.vote_total}} Vote{{project.vote_total|pluralize:"s"}})
             </h3>
-            <form class="form" action="#" method="POST">
-              <!-- Textarea -->
-              <div class="form__field">
-                <label for="formInput#textarea"></label>
-                <textarea class="input input--textarea" name="message" id="formInput#textarea"
-                  placeholder="Write your comments here..."></textarea>
-              </div>
-              <button class="button-feedback-comments" type="submit">Comments</button>
-            </form>
+            {% if request.user.profile.id in project.reviewers %}
+               <p class="project--rating">You have already submitted the review for this project</p>
+            
+            {% elif request.user.profile == project.owner %}
+               <p class="project--rating">You can't review your own project</p>
+            
+            {% elif request.user.is_authenticated %}
+               <form class="form" action="{% url 'project' project.id %}" method="POST">
+                  {% csrf_token %}
+      
+                  {% for field in form %}
+                     <div class="form__field">
+                        <label for="formInput#textarea">{{field.label}}</label>
+                        <!-- <textarea class="input input--textarea" name="message" id="formInput#textarea"
+                           placeholder="Write your comments here..."></textarea> -->
+                        {{field}}
+                     </div>
+               {% endfor %}
+               <button class="button-feedback-comments" type="submit">Submit Review</button>
+               </form>
+            {% else %}
+               <!-- checking on which page the user is currently at and after user logs in redirect to the same page by adding ?next={{request.path}}-->
+               <!-- <a href="{% url 'login' %}?next={{request.path}}" class="project--rating">Log in required to leave a review</a> -->
+               <a class="title-link" href="{% url 'login' %}?next={{request.path}}"><img src="/static/images/external.png" alt="code" height="30px">Log in to leave a review</a>
+            {% endif %}
+
+
             <div class="commentList">
-              <div class="comment">
-                <a href="profile.html">
-                  <img class="avatar avatar--md"
-                    src="https://pbs.twimg.com/profile_images/1335382240931368961/b3wSZKj4_400x400.jpg" alt="user" />
-                </a>
-                <div class="comment__details">
-                  <a href="profile.html" class="comment__author">Sulamita Ivanov</a>
-                  <p class="comment__info">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit alias numquam perferendis
-                    mollitia minus minima exercitationem possimus ab deserunt qui, soluta iusto doloribus eveniet
-                    similique consequuntur ratione, dignissimos ut magni laborum quo.
-                  </p>
-                </div>
-              </div>
+               {% for review in project.review_set.all %}
+                  {% if review.body %}
+                     <div class="comment">
+                        <a href="profile.html">
+                           <img class="avatar avatar--md"
+                           src="{{review.owner.profile_image.url}}" alt="user" width="100px"/>
+                        </a>
+                        <div class="comment__details">
+                           <a href="{% url 'user-profile'  review.owner.id %}" class="comment__author project__author">{{review.owner.name}}</a>
+                              <h2 class="comment__info project--rating" id="text">{{review.body|linebreaksbr}}</h2>
+                        </div>
+                     </div>
+                  {% endif %}
+              {% endfor %}
             </div>
           </div>
        </article>
@@ -100,3 +117,7 @@
  </div>
  <!-- Side section ends -->
 {% endblock content %}
+
+
+
+

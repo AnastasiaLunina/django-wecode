@@ -21,20 +21,45 @@ class Project(models.Model):
         return self.title
 
     class Meta:
-        ordering = ['-created']
+        ordering = ['-vote_ratio', '-vote_total', 'title']
+
+    # making sure the reviewer can't submit the review twice, by getting the list of ids 
+    @property
+    def reviewers(self):
+        queryset = self.review_set.all().values_list('owner__id', flat=True)
+        return queryset
+
+
+    @property
+    def get_vote_count(self):
+        reviews = self.review_set.all()
+        up_votes = reviews.filter(value="up").count()
+        total_votes = reviews.count()
+        # down_votes = reviews.filter(value="down")
+
+        ratio = (up_votes / total_votes) * 100
+        self.vote_total = total_votes
+        self.vote_ratio = ratio
+        self.save()
+
 
 class Review(models.Model):
     VOTE_TYPE = (
-        ('up', 'Up Vote'),
-        ('down', 'Down Vote'),
+        ('up', 'Love it!'),
+        ('down', 'You can do better'),
     )
-    # owner
+    owner = models.ForeignKey(Profile, on_delete=models.CASCADE, null=True)
     project = models.ForeignKey(Project, on_delete=models.CASCADE, null=True)
     body = models.TextField(null=True, blank=True)
     value = models.CharField(max_length=200, choices=VOTE_TYPE)
     created = models.DateTimeField(auto_now_add=True)
     id = models.UUIDField(default=uuid.uuid4, unique=True, 
                           primary_key=True, editable=False)
+
+    # binding owner and review, so no owner and no review can have duplicate instances of revies
+    # to avoid leaving several reviews for one project by one person
+    class Meta:
+        unique_together = [['owner', 'project']]
 
     def __str__(self):
         return self.value

@@ -996,6 +996,49 @@ body {
   margin: 20px auto auto auto;
 }
 
+.comment {
+  display: flex;
+}
+
+.comment__details {
+  margin-left: 10px;
+}
+
+
+select#id_value.input {
+  width: 100%;
+  height: 30px;
+  border-radius: 15px;
+  outline: black;
+  padding: 15px;
+  border: 2px solid lightgray;
+  border-radius: 15px;
+  box-shadow: 0 8px 8px -4px grey;
+  outline: black;
+}
+
+select#id_value.option {
+  width: 100%;
+  height: 30px;
+  border-radius: 15px;
+  outline: black;
+  padding: 15px;
+  border: 2px solid lightgray;
+  border-radius: 15px;
+  box-shadow: 0 8px 8px -4px grey;
+  outline: black;
+}
+
+.dropdown {
+  cursor: pointer;
+  width: 100%;
+  height: 30px;
+  outline: black;
+  border: 2px solid lightgray;
+  border-radius: 15px;
+  box-shadow: 0 8px 8px -4px grey;
+  outline: black;
+}
 
 
 
