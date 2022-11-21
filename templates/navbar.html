@@ -14,13 +14,14 @@
             <li class="navbar__item">
                 <a href="{% url 'projects' %}" class="navbar__links">Projects</a>
             </li>
-            <li class="navbar__item">
-                <a href="" class="navbar__links">Inbox</a>
-            </li>
-            <li class="navbar__item">
-                <a href="{% url 'account' %}" class="navbar__links">My Account</a>
-            </li>
+
             {% if request.user.is_authenticated %}
+                <li class="navbar__item">
+                    <a href="{% url 'inbox' %}" class="navbar__links">Inbox</a>
+                </li>
+                <li class="navbar__item">
+                    <a href="{% url 'account' %}" class="navbar__links">{{request.user|title}}'s Account</a>
+                </li>
                 <li class="navbar__item">
                     <button class="nav__btn">
                         <a href="{% url 'create-project' %}" class="navbar__links">Add project</a>

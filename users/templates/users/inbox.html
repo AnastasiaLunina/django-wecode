@@ -1,0 +1,36 @@
+{% extends 'main.html' %}
+
+{% load static %}
+
+{% block content %}
+
+<!-- Main Section -->
+<main class="content-box">
+    <div class="formWrapper inbox-wrapper">
+      <h3 class="inbox__title">New Messages(<span class="highlight-message">{{unread_count}}</span>)</h3>
+      <ul class="messages">
+        {% for message in all_messages %}
+        {% if message.is_read == False %}
+            <li class="message messages-list-item">
+                <a href="message.html" class="messages-link">
+                    <p class="message__author message--unread"><span class="highlight-message">From: </span>{{message.name}}</p>
+                    <p class="message__subject message--unread"><span class="highlight-message">Subject: </span> {{message.subject}}</p>
+                    <p class="message__date message--unread"><span class="highlight-message">When: </span>{{message.created}}</p>
+                </a>
+            </li>
+        {% else %}
+            <li class="message messages-list-item">
+                <a href="message.html" class="messages-link">
+                    <p class="message__author"><span class="highlight-message">From: </span>{{message.name}}</p>
+                    <p class="message__subject"><span class="highlight-message">Subject: </span> {{message.subject}}</p>
+                    <p class="message__date"><span class="highlight-message">When: </span>{{message.created}}</p>
+                </a>
+            </li>
+        {% endif %}
+        <hr class="messages-line">
+        {% endfor %}
+      </ul>
+    </div>
+  </main>
+
+{% endblock %}

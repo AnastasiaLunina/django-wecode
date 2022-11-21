@@ -126,7 +126,12 @@ body {
     background-color: #ff8177;
     background-image: linear-gradient(to top, #ff0844 0%, #ffb199 100%);
     background-size: 100%;
-    padding: 50px;
+    padding: 70px;
+}
+
+.user-welcome-container {
+  display: flex;
+  justify-content: center;
 }
 
 .form__field {
@@ -1040,7 +1045,54 @@ select#id_value.option {
   outline: black;
 }
 
+/* Messages */
 
+.inbox-wrapper {
+  flex-direction: column;
+  width: 50vw;
+}
+
+.messages {
+  list-style-type: none;
+}
+
+.messages-inner-container {
+  display: flex;
+  flex-direction: row;
+}
+
+.messages-link {
+  margin-bottom: 20px;
+  color: gray;
+}
+
+.messages-line {
+  margin: 20px 0;
+}
+
+.inbox__title {
+  margin-bottom: 50px;
+  color: gray;
+}
+
+.message__author, .message__subject, .message__date {
+  margin-bottom: 10px;
+}
+
+.messages-list-item {
+  display: flex;
+  justify-content: space-between;
+}
+
+
+.highlight-message {
+  color: #ff0844
+}
+
+.message--unread {
+  font-weight: bold;
+  color: black;
+}
 
   
   
