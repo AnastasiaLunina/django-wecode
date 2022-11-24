@@ -1094,6 +1094,16 @@ select#id_value.option {
   color: black;
 }
 
+.project-owner-link {
+  color: black;
+}
+
+.go-back-link {
+  margin-bottom: 20px;
+  color: gray;
+  font-size: 20px;
+}
+
   
   
 

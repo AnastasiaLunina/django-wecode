@@ -5,7 +5,7 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.db.models import Q
 from .models import Profile, Message
-from .forms import CustomUserCreationForm, ProfileForm, SkillForm
+from .forms import CustomUserCreationForm, ProfileForm, SkillForm, MessageForm
 from .utils import search_profiles, paginate_profiles
 
 # Create your views here.
@@ -215,3 +215,58 @@ def inbox(request):
     }
     
     return render(request, 'users/inbox.html', context)
+
+
+@login_required(login_url='login')
+def inbox_messages(request, pk):
+    # getting currently logged in user
+    profile = request.user.profile
+    # # getting messages from model's related_name by id
+    all_messages = profile.messages.get(id=pk)
+
+    if all_messages.is_read == False:
+        all_messages.is_read = True
+        all_messages.save()
+
+    context = {
+        'all_messages': all_messages,
+    }
+    
+    return render(request, 'users/inbox_messages.html', context)
+
+
+def compose_message(request, pk):
+    # getting current recipient 
+    recipient = Profile.objects.get(id=pk)
+    form = MessageForm()
+
+    try:
+        sender = request.user.profile
+    except:
+        sender = None
+
+    if request.method == 'POST':
+        form = MessageForm(request.POST)
+
+        if form.is_valid():
+            message = form.save(commit=False)
+            message.sender = sender
+            message.recipient = recipient
+
+            if sender:
+                message.name = sender.name
+                message.email = sender.email
+            
+            message.save()
+
+            success_message = f'Thank you, {message.name.capitalize()}! {recipient.name} will get back to you shortly!'
+
+            messages.success(request, success_message)
+            return redirect('user-profile', pk=recipient.id)
+   
+    context = {
+        'recipient': recipient,
+        'form': form,
+    }
+    
+    return render(request, 'users/message_form.html', context)

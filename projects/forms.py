@@ -48,3 +48,4 @@ class ReviewForm(ModelForm):
 
         for name, field in self.fields.items():
             field.widget.attrs.update({'class': 'dropdown'})
+

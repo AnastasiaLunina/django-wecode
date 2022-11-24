@@ -9,7 +9,7 @@
     <div class="name-image">
        <h2>{{project.title}}</h2>
        <br>
-       <h4>Developed by {{project.owner}}</h4>
+       <h4><a href="{% url 'user-profile' project.owner.id %}" class="project-owner-link">Developed by <span class="project__author">{{project.owner}}</span></a></h4>
        <br>
     </div>
 </div>
@@ -98,7 +98,7 @@
                {% for review in project.review_set.all %}
                   {% if review.body %}
                      <div class="comment">
-                        <a href="profile.html">
+                        <a href="{% url 'user-profile' review.owner.id %}">
                            <img class="avatar avatar--md"
                            src="{{review.owner.profile_image.url}}" alt="user" width="100px"/>
                         </a>

@@ -1,0 +1,20 @@
+{% extends 'main.html' %}
+
+{% load static %}
+
+{% block content %}
+
+<!-- Main Section -->
+<main class="content-box">
+    <div class="formWrapper inbox-wrapper">
+        <a class="title-link go-back-link" href="{% url 'inbox' %}">
+            <img src="/static/images/back.png" alt="code" height="30px">Go Back
+        </a>
+        <p class="message__author"><span class="highlight-message">From: </span>{{all_messages.name}}</p>
+        <p class="message__subject"><span class="highlight-message">Subject: </span> {{all_messages.subject}}</p>
+        <p class="message__date"><span class="highlight-message">When: </span>{{all_messages.created}}</p>
+        <p><span class="highlight-message">Body: </span>{{all_messages.body|linebreaksbr}}</p>
+    </div>
+  </main>
+
+{% endblock %}

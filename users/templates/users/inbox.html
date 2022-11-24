@@ -12,7 +12,7 @@
         {% for message in all_messages %}
         {% if message.is_read == False %}
             <li class="message messages-list-item">
-                <a href="message.html" class="messages-link">
+                <a href="{% url 'inbox-messages' message.id %}" class="messages-link">
                     <p class="message__author message--unread"><span class="highlight-message">From: </span>{{message.name}}</p>
                     <p class="message__subject message--unread"><span class="highlight-message">Subject: </span> {{message.subject}}</p>
                     <p class="message__date message--unread"><span class="highlight-message">When: </span>{{message.created}}</p>
@@ -20,7 +20,7 @@
             </li>
         {% else %}
             <li class="message messages-list-item">
-                <a href="message.html" class="messages-link">
+                <a href="{% url 'inbox-messages' message.id %}" class="messages-link">
                     <p class="message__author"><span class="highlight-message">From: </span>{{message.name}}</p>
                     <p class="message__subject"><span class="highlight-message">Subject: </span> {{message.subject}}</p>
                     <p class="message__date"><span class="highlight-message">When: </span>{{message.created}}</p>

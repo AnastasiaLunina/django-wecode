@@ -1,8 +1,9 @@
 ## About
-### Full Stack Application for developers to share their work
+### Full Stack Application for developers to share their projects
 - Search the developers, projects, skills using keywords <br>
 - Get detailed information about developer <br>
 - Get detailed information about each project <br>
+- After user is logged in, user is redirected to Edit profile section, where user can add information such as profile picture, bio, skills
 - For logged in users the My Account section is available, user can perform CRUD operations to 
 add new projects and skills, delete those, as well as update <br>
 - Logged in users can leave comments and vote for the projects, this way project's rating is calculated <br>
@@ -44,7 +45,7 @@ deactivate
 (env)$ cd project
 (env)$ python manage.py runserver
 ```
-6. And navigate to `http://127.0.0.1:8000/
+6. And navigate to http://127.0.0.1:8000/
 
 
 
