@@ -200,7 +200,7 @@ body {
 }
   
 .projectsList {
-    margin-top: 8rem;
+    margin-top: 2rem;
   }
 
   /*========== Projects ==========*/
@@ -282,38 +282,6 @@ body {
   }
   
   .grid--three > .column {
-    flex-basis: 100%;
-  }
-  
-  @media screen and (min-width: 800px) {
-    .grid--three {
-      margin-right: -2%;
-    }
-  
-    .grid--three > .column {
-      margin-right: 2%;
-    }
-  
-    .grid--three > .column {
-      flex-basis: 48%;
-    }
-  }
-  
-  @media screen and (min-width: 1200px) {
-    .grid--three {
-      margin-right: -2.33%;
-    }
-  
-    .grid--three > .column {
-      margin-right: 2.33%;
-    }
-  
-    .grid--three > .column {
-      flex-basis: 31%;
-    }
-  }
-  
-  .grid--two > .column {
     flex-basis: 100%;
   }
   
@@ -546,20 +514,6 @@ body {
     margin: 20px 0;
     font-size: 1rem;
     width: 160px;
-  }
-
-  @media screen and (min-width: 800px) {
-    .grid--two {
-      margin-right: -2%;
-    }
-  
-    .grid--two > .column {
-      margin-right: 2%;
-    }
-  
-    .grid--two > .column {
-      flex-basis: 48%;
-    }
   }
   
 /*=======================
@@ -1102,6 +1056,10 @@ select#id_value.option {
   margin-bottom: 20px;
   color: gray;
   font-size: 20px;
+}
+
+.forgot-email-par {
+  text-align: center;
 }
 
   

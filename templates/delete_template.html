@@ -6,7 +6,7 @@
             {% csrf_token %}
             <p>Are you sure you want to delete <span style="font-weight:bold">{{object}}</span>?</p>
             <button class="button-feedback-comments" type="submit">
-                <a href="{{ request.GET.next }}" class="register__signup-link go-back-link">Go Back</a>
+                <a href="{{ request.GET.next }}" class="button-feedback-comments">Go Back</a>
             </button>
             <button class="button-feedback-comments" type="submit">Confirm</button>
         </form>

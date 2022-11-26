@@ -12,12 +12,11 @@
                     <img src="/static/images/back.png" alt="code" height="30px">Go Back
                 </a>
                 <h1 class="register__header-title">Compose your message</h1>
-                <p>It's your time to shine!</p>
             </div>
 
             {% csrf_token %}
 
-            {% if request.user.is_authenticated == False %}
+            {% if not request.user.is_authenticated %}
 
                 <label for="formInput#text" class="register__form-label">{{form.name.label}}</label>
                 <div class="form-change-picture">
@@ -29,7 +28,17 @@
                     {{form.email}}
                 </div>
 
-            {% endif %}
+                <label for="formInput#text" class="register__form-label">{{form.subject.label}}</label>
+                <div class="form-change-picture">
+                    {{form.subject}}
+                </div>
+    
+                <label for="formInput#text" class="register__form-label">{{form.body.label}}</label>
+                <div class="form-change-picture">
+                    {{form.body}}
+                </div>
+                
+            {% elif request.user.is_authenticated %}
 
             <label for="formInput#text" class="register__form-label">{{form.subject.label}}</label>
             <div class="form-change-picture">
@@ -40,6 +49,18 @@
             <div class="form-change-picture">
                 {{form.body}}
             </div>
+
+            {% endif %}
+
+            <!-- <label for="formInput#text" class="register__form-label">{{form.subject.label}}</label>
+            <div class="form-change-picture">
+                {{form.subject}}
+            </div>
+
+            <label for="formInput#text" class="register__form-label">{{form.body.label}}</label>
+            <div class="form-change-picture">
+                {{form.body}}
+            </div> -->
 
             <div class="register__header">
                 <button class="button-feedback-comments" type="submit">Submit</button>

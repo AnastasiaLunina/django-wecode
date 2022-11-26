@@ -48,7 +48,7 @@ def search_profiles(request):
     # using filter method and importing Q from django models to implement search by several fields 
     profiles = Profile.objects.distinct().filter(
                                     Q(name__icontains=search_query)| 
-                                    Q(short_intro=search_query) |
+                                    Q(short_intro__icontains=search_query) |
                                     Q(skill__in=skills)
                                 )    
     return profiles, search_query

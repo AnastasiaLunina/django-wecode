@@ -62,7 +62,7 @@
                 <input type="password" name="password" placeholder="Your Password" class="id_title"/>
                 <div class="register_button">
                     <button type="submit" value="Login" class='button-feedback-comments'>Login</button>
-                    <p class="register_button-par">Forgot password?</p>
+                    <p class="register_button-par"><a href="{% url 'reset_password' %}" class="project__author">Forgot password?</a></p>
                 </div>
         
                 <p>Don't have an account? <a href="{% url 'register' %}" class="register__signup-link">Sign up</a></p>

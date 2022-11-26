@@ -1,7 +1,9 @@
 from django.db.models.signals import post_save, post_delete
 from django.dispatch import receiver
 from django.contrib.auth.models import User
+from django.core.mail import send_mail
 from .models import Profile
+from django.conf import settings
 
 
 # add event listeners 
@@ -18,6 +20,17 @@ def create_profile(sender, instance, created, **kwargs):
             username = user.username,
             email = user.email,
             name = user.first_name
+        )
+
+        subject = "Thank you for regerester at WeCode!"
+        message = 'We are very excited to learn more about you!'
+
+        send_mail(
+            subject, 
+            message, 
+            settings.EMAIL_HOST_USER,
+            [profile.email],
+            fail_silently=False,
         )
 
 def update_profile(sender, instance, created, **kwargs):

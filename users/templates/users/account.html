@@ -33,9 +33,12 @@
                         {% endif %}
                     </ul>
 
-                    <div>
-                        <button class="button-feedback-comments">Send Message</button>
-                    </div>
+                    {% if request.user.profile.id != profile.id %}
+                        <div>
+                            <button class="button-feedback-comments"><a href="{% url 'compose-message' profile.id %}" class="project-owner-link">Message</a></button>
+                        </div>
+                    {% endif %}
+
                 </div>
             </div>
 
