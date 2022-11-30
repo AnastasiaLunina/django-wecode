@@ -47,5 +47,12 @@ deactivate
 ```
 6. And navigate to http://127.0.0.1:8000/
 
+## Search and Pagination
+### Search implemented by quering the value of 'search_query' attribute from HTML
+### Pagination implemented using Paginator class built in in Django
+
+## Login
+###  I used User class from built in Django authentication system, I got user data from the POST request and then query it with objects.get method from User class instance passing username as an argument. Then using authenticate method chheck if the given credentials are valid, return a User object
+
 
 

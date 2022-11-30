@@ -47,8 +47,9 @@ def project(request, pk):
     }
     return render(request, 'projects/single-project.html', context)
 
-@login_required(login_url = 'login')
+@login_required(login_url='login')
 def createProject(request):
+    # getting particular user
     profile = request.user.profile
     form = ProjectForm()
 

@@ -20,7 +20,6 @@ def paginate_projects(request, projects, results):
         projects = paginator.page(page)
 
     # for large range of numbers
-
     left_index = (int(page) - 4)
     right_index = (int(page) + 5)
 

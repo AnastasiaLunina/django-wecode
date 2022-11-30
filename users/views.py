@@ -170,7 +170,6 @@ def edit_skill(request, pk):
     if request.method == 'POST':
         form = SkillForm(request.POST, instance=skill)
         # getting particular user
-        form = SkillForm(request.POST)
 
         if form.is_valid():
             form.save()
