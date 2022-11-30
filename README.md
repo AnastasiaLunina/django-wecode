@@ -48,26 +48,28 @@ deactivate
 6. And navigate to http://127.0.0.1:8000/
 
 ## Search and Pagination
-### Search implemented by quering the value of `search_query` attribute from HTML
-### Pagination implemented using `Paginator` class built in in Django
+Search implemented by quering the value of `search_query` attribute from HTML
+<br>
+Pagination implemented using `Paginator` class built in in Django
 
 ## Login
-###  I used `User` class from built in Django authentication system, I got user data from the `request.POST` and then query it with `objects.get` method from `User` class instance passing `username` as an argument. Then using `authenticate` method check if the given credentials are valid, return a `User` object. Then redirect user to the same page user was before log in by adding `?next={{request.path}}` to URL
+I used `User` class from built in Django authentication system, I got user data from the `request.POST` and then query it with `objects.get` method from `User` class instance passing `username` as an argument. Then using `authenticate` method check if the given credentials are valid, return a `User` object. Then redirect user to the same page user was before log in by adding `?next={{request.path}}` to URL
 
 ## Register
-### register user with `user_register` method and accessing the data from `UserCreationForm` class which is built in in `django.contrib.auth.forms`. After user is regerested and logged in, user redirected to edit profile section. 
+register user with `user_register` method and accessing the data from `UserCreationForm` class which is built in in `django.contrib.auth.forms`. After user is regerested and logged in, user redirected to edit profile section. 
 
 ## Edit profile
-### Used built in decorator `@login_required(login_url='login')` to run the method only if user is logged in.
-### Django uses request and response objects to pass state through the system.
-
-### When a page is requested, Django creates an HttpRequest object that contains metadata about the request. Then Django loads the appropriate view, passing the HttpRequest as the first argument to the view function.
-### Then getting particular user with `request.user.profile` and adding `instance=profile` as an argument to `ProfileForm` pre-render user's information in form
+Used built in decorator `@login_required(login_url='login')` to run the method only if user is logged in.
+<br>
+Django uses request and response objects to pass state through the system.
+When a page is requested, Django creates an HttpRequest object that contains metadata about the request. Then Django loads the appropriate view, passing the HttpRequest as the first argument to the view function.
+<br>
+Then getting particular user with `request.user.profile` and adding `instance=profile` as an argument to `ProfileForm` pre-render user's information in form
 
 
 ### CRUD operations with skills 
-### Used built in decorator `@login_required(login_url='login')` to run the method only if user is logged in.
-### Then getting particular user with `request.user.profile` and adding `instance=profile` as an argument to `ProfileForm` pre-render user's information in form
+Used built in decorator `@login_required(login_url='login')` to run the method only if user is logged in.
+Then getting particular user with `request.user.profile` and adding `instance=profile` as an argument to `ProfileForm` pre-render user's information in form
 #### Create 
 getting particular user
 `profile = request.user.profile`
