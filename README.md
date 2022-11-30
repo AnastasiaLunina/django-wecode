@@ -8,7 +8,7 @@
 add new projects and skills, delete those, as well as update <br>
 - Logged in users can leave comments and vote for the projects, this way project's rating is calculated <br>
 - Pagination implemented <br>
-- Login/Logout <br>
+- Login/Logout/Register <br>
 
 ## Setup
 
