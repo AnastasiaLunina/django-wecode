@@ -23,6 +23,16 @@ class Project(models.Model):
     class Meta:
         ordering = ['-vote_ratio', '-vote_total', 'title']
 
+    # using property decorator to use method as an attribute
+    @property
+    def get_img_url(self):
+        try:
+            url = self.featured_image.url
+        except:
+            url = 'default.png'
+        return url
+
+
     # making sure the reviewer can't submit the review twice, by getting the list of ids 
     @property
     def reviewers(self):

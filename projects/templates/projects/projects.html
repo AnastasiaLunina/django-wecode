@@ -28,7 +28,11 @@
                 <div class="column">
                     <div class="card project">
                           <a href="{% url 'project' project.id %}" class="project">
+                            {% if project.featured_image.url %}
                             <img class="project__thumbnail" src="{{project.featured_image.url}}" alt="project thumbnail" />
+                            {% else %}
+                            <img class="project__thumbnail" src="default" alt="project thumbnail" />
+                            {% endif %}
                           </a>                      
                         <div class="card__body">
                         <h3 class="project__title">{{project.title}}</h3>

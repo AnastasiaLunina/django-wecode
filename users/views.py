@@ -254,7 +254,7 @@ def compose_message(request, pk):
 
             if sender:
                 message.name = sender.name
-                message.email = sender.email
+                message.email = sender.email    
             
             message.save()
 

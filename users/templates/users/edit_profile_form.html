@@ -6,6 +6,7 @@
 
 <div class="register-wrapper">
     <div class="register register__main-container">
+        <!-- To attach images or files attribute needed enctype="multipart/form-data" -->
         <form method="POST" action="{% url 'edit-profile' %}" enctype="multipart/form-data">
             <div class="register__header">
                 <img src="{% static 'images/add-user.png' %}" alt="icon" class="register__image">
