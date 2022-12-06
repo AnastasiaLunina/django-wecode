@@ -145,4 +145,4 @@ EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'lunina.anastasiya@gmail.com'
-EMAIL_HOST_PASSWORD = 'exmgphvzeewcovyu'
+EMAIL_HOST_PASSWORD = ''
